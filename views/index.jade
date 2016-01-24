@@ -1,0 +1,7 @@
+html
+  head
+    title= title
+  body
+    each val in images
+      div
+        img(src=val.display_sizes[0]["uri"])
