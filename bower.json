@@ -3,7 +3,8 @@
   "description": "",
   "main": "server.js",
   "authors": [
-    "Jonathan Lemonsu <jlemonsu@ftel.fr>"
+    "Jonathan Lemonsu <jonathan.lemonsu@gmail.com>",
+    "Kevin Cauchois <cauchois.k@gmail.com>"
   ],
   "license": "ISC",
   "homepage": "https://github.com/Lotto/10ImagesDe",
@@ -18,7 +19,5 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "slick-carousel": "~1.5.9"
-  }
+  "dependencies": {}
 }

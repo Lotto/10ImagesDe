@@ -10,8 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer": "^6.3.1",
+    "autoprefixer-core": "^6.0.1",
     "express": "^4.13.4",
     "jade": "^1.11.0",
+    "node-sass": "^3.4.2",
+    "postcss": "^5.0.14",
     "sync-request": "^3.0.0"
   }
 }
