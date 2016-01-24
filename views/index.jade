@@ -7,6 +7,7 @@ block title
 block content
   h1 10 images de
   .ten-images 
-    each val in images
+    each val, index in images
       .one-image
+        .index= index + 1
         img(src=val.display_sizes[0]["uri"])
