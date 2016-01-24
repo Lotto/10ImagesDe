@@ -1,0 +1,24 @@
+{
+  "name": "10ImagesDe",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Jonathan Lemonsu <jlemonsu@ftel.fr>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Lotto/10ImagesDe",
+  "moduleType": [
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "slick-carousel": "~1.5.9"
+  }
+}

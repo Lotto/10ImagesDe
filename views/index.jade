@@ -1,7 +1,11 @@
-html
-  head
-    title= title
-  body
-    each val in images
-      div
-        img(src=val.display_sizes[0]["uri"])
+//- index.jade
+extends ./layout.jade
+
+block title
+  title= title
+
+block content
+  h1 10 images de 
+  each val in images
+    div
+      img(src=val.display_sizes[0]["uri"])
