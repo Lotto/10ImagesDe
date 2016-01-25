@@ -9,18 +9,12 @@ var postcss = require('postcss');
 app.set('view engine', 'jade');
 
 app.get('/:rq', function (req, res) {
-  // http://developers.gettyimages.com/api/docs/v3/search/images/get/
-  var getty_key = fs.readFileSync("getty.key", "utf8");
-  console.log(getty_key);
-  var getty_request = request('GET', 'https://api.gettyimages.com/v3/search/images?page_size=10&phrase=' + req.params.rq, { 'headers': { "Api-Key" : getty_key }});
-  var getty = JSON.parse(getty_request.getBody("utf8"));
-  var images = getty.images;
-  var ret = "";
-  for(var i = 0; i < images.length; i++) {
-    ret += images[i].display_sizes[0]["uri"] + "\n";
-  }
-
-  sass
+  // https://developers.google.com/apis-explorer/?hl=fr#p/customsearch/v1/search.cse.list
+  var google_key = fs.readFileSync("google.key", "utf8");
+  var cx_key = fs.readFileSync("cx.key", "utf8");
+  var google_request = request('GET', 'https://www.googleapis.com/customsearch/v1?cx=' + cx_key + '&key=' + google_key + '&imgSize=large&searchType=image&q=' + req.params.rq);
+  var google_result = JSON.parse(google_request.getBody("utf8"));
+  var images = google_result.items;
   res.render('index', {images : images});
 });
 
