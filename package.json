@@ -15,8 +15,11 @@
     "browser-sync": "^2.11.1",
     "express": "^4.13.4",
     "jade": "^1.11.0",
+    "jquery": "^2.2.0",
+    "jquery-lazy": "^1.6.5",
     "node-sass": "^3.4.2",
     "postcss": "^5.0.14",
+    "slick-carousel": "^1.5.9",
     "sync-request": "^3.0.0"
   }
 }

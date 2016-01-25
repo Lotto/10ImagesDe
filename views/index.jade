@@ -5,9 +5,16 @@ block title
   title= title
 
 block content
-  h1 10 images de
+  h1.generated-title 
+    | 10 images de
+    span.subject
   .ten-images 
     each val, index in images
       .one-image
         .index= index + 1
-        img(src=val.link)
+        img.lazy(data-src=val.link)
+
+  script(type='text/javascript').
+    $(function() {
+        $('.lazy').Lazy();
+    });

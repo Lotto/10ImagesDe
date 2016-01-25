@@ -37,6 +37,29 @@ app.get('/css/site.css', function (req, res) {
   res.send(autoprefixed);
 });
 
+app.get('/css/*.scss', function (req, res) {
+  var file = req.url.split("/css/");
+  var scss = fs.readFileSync(__dirname + '/node_modules/' + file[1], {encoding : 'utf8'});
+
+  var css = sass.renderSync({
+    data : scss,
+    includePaths : ["sass"]
+  }).css.toString();
+
+  var autoprefixed = postcss([ autoprefixer ]).process(css).css;
+
+  res.header('Content-Type', 'text/css');
+  res.send(autoprefixed);
+});
+
+app.get('/js/*.js', function(req, res){
+  var file = req.url.split("/js/");
+  var js = fs.readFileSync(__dirname + '/node_modules/' + file[1], {encoding : 'utf8'});
+
+  res.header('Content-Type', 'text/javascript');
+  res.send(js);
+});
+
 var PORT = 3000;
 app.listen(PORT, function () {
   browser.init(null, {
