@@ -37,11 +37,10 @@ app.get('/css/site.css', function (req, res) {
   res.send(autoprefixed);
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-  
+var PORT = 3000;
+app.listen(PORT, function () {
   browser.init(null, {
-    proxy: "http://localhost:3000",
+    proxy: "http://localhost:"+PORT,
         files: ["sass/**/*", "views/**/*"],
         port: 7000,
     });
