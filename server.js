@@ -5,17 +5,22 @@ var fs = require('fs')
 var sass = require('node-sass');
 var autoprefixer = require('autoprefixer');
 var postcss = require('postcss');
+var browser = require('browser-sync');
 
 app.set('view engine', 'jade');
 
+var images_cached = {};
+
 app.get('/:rq', function (req, res) {
-  // https://developers.google.com/apis-explorer/?hl=fr#p/customsearch/v1/search.cse.list
-  var google_key = fs.readFileSync("google.key", "utf8");
-  var cx_key = fs.readFileSync("cx.key", "utf8");
-  var google_request = request('GET', 'https://www.googleapis.com/customsearch/v1?cx=' + cx_key + '&key=' + google_key + '&imgSize=large&searchType=image&q=' + req.params.rq);
-  var google_result = JSON.parse(google_request.getBody("utf8"));
-  var images = google_result.items;
-  res.render('index', {images : images});
+  var rq =  req.params.rq;
+  if (images_cached[rq] == null) {  // https://developers.google.com/apis-explorer/?hl=fr#p/customsearch/v1/search.cse.list
+    var google_key = fs.readFileSync("google.key", "utf8");
+    var cx_key = fs.readFileSync("cx.key", "utf8");
+    var google_request = request('GET', 'https://www.googleapis.com/customsearch/v1?cx=' + cx_key + '&key=' + google_key + '&imgSize=large&searchType=image&q=' + rq);
+    var google_result = JSON.parse(google_request.getBody("utf8"));
+    images_cached[rq] = google_result.items;
+  }
+  res.render('index', {images : images_cached[rq]});
 });
 
 app.get('/css/site.css', function (req, res) {
@@ -34,4 +39,10 @@ app.get('/css/site.css', function (req, res) {
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
+  
+  browser.init(null, {
+    proxy: "http://localhost:3000",
+        files: ["sass/**/*", "views/**/*"],
+        port: 7000,
+    });
 });
